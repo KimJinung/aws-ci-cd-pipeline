@@ -1,9 +1,10 @@
-import unittest
+import sys, json
 
-from app.main import main
+from app.app import handler
 
 
-class TestMain(unittest.TestCase):
+def test_handler():
+    response = handler("", "")
 
-    def test_main(self):
-        self.assertEqual(main(), "Hello world")
+    assert response.get("statusCode") == 200
+    assert response.get("body") == f"Hello from lambda using docker: {sys.version}"
