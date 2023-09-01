@@ -1,4 +1,4 @@
-import sys, json
+import sys
 
 from app.app import handler
 
