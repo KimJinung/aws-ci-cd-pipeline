@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.9
 
-# !Apple Silicon must use platform option!
+#If you are using Apple Silicon, you must add the platform amd64 option
 FROM --platform=linux/amd64 public.ecr.aws/lambda/python:$PYTHON_VERSION
 
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
