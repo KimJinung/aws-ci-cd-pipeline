@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Start CI/CD process...
+      - echo Current AWS version...
+      - aws --version
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $ECR_REPOSITORY_NAME:latest .
+      - docker tag $ECR_REPOSITORY_NAME:latest $ECR_REPOSITORY_URL:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image to ECR...
+      - docker push $ECR_REPOSITORY_URL:latest
+      - aws lambda update-function-code --function-name python-API --image-uri $ECR_REPOSITORY_URL:latest
