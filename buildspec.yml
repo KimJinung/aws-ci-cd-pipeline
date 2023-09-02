@@ -5,6 +5,7 @@ phases:
       - echo Start CI/CD process...
       - echo Current AWS version...
       - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
   build:
     commands:
       - echo Build started on `date`
